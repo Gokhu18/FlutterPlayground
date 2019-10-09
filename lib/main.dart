@@ -13,10 +13,17 @@ import 'package:flutter_playground/ui/flutter_admob/admob_example.dart';
 import 'package:flutter_playground/ui/quick_actions/QuickActionsExample.dart';
 import 'package:flutter_playground/ui/transform/transform_example.dart';
 import 'package:flutter_playground/ui/wrap/wrap_example.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 import 'imports.dart';
 
-void main() => runApp(MyApp());
+void main() {
+//  Crashlytics.instance.enableInDevMode = true;
+  // Pass all uncaught errors from the framework to Crashlytics.
+  FlutterError.onError = Crashlytics.instance.recordFlutterError;
+  runApp(MyApp());
+}
+
 
 class MyApp extends StatelessWidget {
   static FirebaseAnalytics analytics = FirebaseAnalytics();

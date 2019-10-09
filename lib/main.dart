@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_playground/ui/app_bar_bottom/appbar_bottom.dart';
 import 'package:flutter_playground/ui/datatable/data_table_example.dart';
@@ -17,6 +19,10 @@ import 'imports.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  static FirebaseAnalytics analytics = FirebaseAnalytics();
+  static FirebaseAnalyticsObserver observer =
+      FirebaseAnalyticsObserver(analytics: analytics);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,6 +32,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       home: MyHomePage(title: Strings.appName),
+      navigatorObservers: <NavigatorObserver>[observer],
       routes: routes(),
     );
   }
